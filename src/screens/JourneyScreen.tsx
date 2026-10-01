@@ -9,6 +9,7 @@ import { player } from "../mocks/player";
 import { quests } from "../mocks/quests";
 import { colors, fonts } from "../theme";
 import { showMessage } from "../utils/showMessage";
+import { router } from "expo-router";
 
 export function JourneyScreen() {
   const featuredQuest = quests[0];
@@ -44,10 +45,13 @@ export function JourneyScreen() {
               <MissionCard
                 quest={featuredQuest}
                 onPress={() =>
-                  showMessage(
-                    featuredQuest.title,
-                    `${featuredQuest.description}\n\nRecompensas: ${featuredQuest.reward.xp} XP e ${featuredQuest.reward.coins} moedas.`,
-                  )
+                  router.push({
+                    pathname: "/missao/[id]",
+                    params: {
+                      id: featuredQuest.id,
+                      origem: "jornada",
+                    },
+                  })
                 }
               />
             )}

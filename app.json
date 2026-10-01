@@ -24,7 +24,17 @@
     },
     "plugins": [
       "expo-image",
-      "expo-font"
-    ]
+      "expo-font",
+      "expo-router",
+      "expo-status-bar"
+    ],
+    "scheme": "questclass",
+    "experiments": {
+      "typedRoutes": true
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    }
   }
 }
