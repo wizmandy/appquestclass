@@ -1,44 +1,51 @@
 import { Platform, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { BottomMenu, MenuSection } from "../components/BottomMenu";
+import { BottomMenu } from "../components/BottomMenu";
 import { colors, fonts } from "../theme";
 
 const missions = [
-    {
-        title: "Derrote o Goblin das Props",
-        difficulty: "Média",
-        xp: "+100 XP",
-        status: "Disponível",
-        color: colors.orange
-    },
-    {
-        title: "Slime dos Componentes",
-        difficulty: "Fácil",
-        xp: "+50 XP",
-        status: "Aceita",
-        color: colors.purple
-    },
-    {
-        title: "Hidra do Estado",
-        difficulty: "Difícil",
-        xp: "+200 XP",
-        status: "Enviada",
-        color: colors.red
-    },
-    {
-        title: "Dragão da API",
-        difficulty: "Chefe",
-        xp: "+500 XP",
-        status: "Disponível",
-        color: colors.red
-    }
+  {
+    title: "Derrote o Goblin das Props",
+    difficulty: "Média",
+    xp: "+100 XP",
+    status: "Disponível",
+
+    color: colors.orange,
+    statusColor: "#8BE9FD",
+  },
+
+  {
+    title: "Slime dos Componentes",
+    difficulty: "Fácil",
+    xp: "+50 XP",
+    status: "Aceita",
+
+    color: colors.purple,
+    statusColor: colors.purple,
+  },
+
+  {
+    title: "Hidra do Estado",
+    difficulty: "Difícil",
+    xp: "+200 XP",
+    status: "Enviada",
+
+    color: colors.red,
+    statusColor: colors.orange,
+  },
+
+  {
+    title: "Dragão da API",
+    difficulty: "Chefe",
+    xp: "+500 XP",
+    status: "Disponível",
+
+    color: colors.red,
+    statusColor: "#8BE9FD",
+  },
 ];
 
 export function MissionScreen() {
-    function handleMenuSelect(section: MenuSection) {
-        console.log(section);
-    }
-
     return (
         <View style={styles.background}>
             <SafeAreaView style={styles.screen}>
@@ -104,10 +111,19 @@ export function MissionScreen() {
                                 <View
                                     style={[
                                         styles.status,
-                                        { borderColor: mission.color },
+                                        {
+                                            borderColor: mission.statusColor,
+                                        },
                                     ]}
                                 >
-                                    <Text style={styles.statusText}>
+                                    <Text
+                                        style={[
+                                            styles.statusText,
+                                            {
+                                                color: mission.statusColor,
+                                            },
+                                        ]}
+                                    >
                                         {mission.status}
                                     </Text>
                                 </View>
@@ -116,7 +132,7 @@ export function MissionScreen() {
                     </View>
                 </ScrollView>
 
-                <BottomMenu onSelect={handleMenuSelect} />
+                <BottomMenu />
             </SafeAreaView>
         </View>
     );
@@ -230,7 +246,6 @@ const styles = StyleSheet.create({
     },
     statusText: {
         fontFamily: fonts.semibold,
-        fontSize: 8,
-        color: colors.text
+        fontSize: 8
     }
 });

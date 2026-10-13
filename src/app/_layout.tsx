@@ -23,6 +23,7 @@ export default function App() {
             {fontsLoaded || fontError ? (
                 <Stack
                     screenOptions={{
+                        headerShown: false,
                         headerStyle: { backgroundColor: colors.surface },
                         headerTintColor: colors.text,
                         contentStyle: { backgroundColor: colors.background },
@@ -34,7 +35,7 @@ export default function App() {
                     />
 
                     <Stack.Screen
-                        name="missao/[id].tsx"
+                        name="missao/[id]"
                         options={{ title: "Missão" }}
                     />
                 </Stack>

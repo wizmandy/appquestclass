@@ -1,40 +1,81 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { usePathname, useRouter } from "expo-router";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+
 import { colors, fonts } from "../theme";
 import { Icon } from "./Icon";
 
-export type MenuSection = "Jornada" | "Missões" | "Taverna" | "Personagem";
-
-type BottomMenuProps = {
-  onSelect: (section: MenuSection) => void;
-};
+export type MenuSection =
+  | "Jornada"
+  | "Missões"
+  | "Taverna"
+  | "Personagem";
 
 const items = [
-  { label: "Jornada", icon: "journey" },
-  { label: "Missões", icon: "quests" },
-  { label: "Taverna", icon: "tavern" },
-  { label: "Personagem", icon: "character" },
+  {
+    label: "Jornada",
+    icon: "journey",
+    route: "/",
+  },
+  {
+    label: "Missões",
+    icon: "quests",
+    route: "/missao/missoes",
+  },
+  {
+    label: "Taverna",
+    icon: "tavern",
+    route: "/missao/taverna",
+  },
+  {
+    label: "Personagem",
+    icon: "character",
+    route: "/missao/personagem",
+  },
 ] as const;
 
-export function BottomMenu({ onSelect }: BottomMenuProps) {
+export function BottomMenu() {
+  const router = useRouter();
+  const pathname = usePathname();
+
   return (
     <View style={styles.container}>
-      {items.map((item) => (
-        <Pressable
-          key={item.label}
-          onPress={() => onSelect(item.label)}
-          accessibilityRole="button"
-          accessibilityLabel={item.label}
-          accessibilityState={{ selected: item.label === "Jornada" }}
-          style={({ pressed }) => [styles.item, pressed && styles.pressed]}
-        >
-          <Icon name={item.icon} />
-          <Text
-            style={[styles.label, item.label === "Jornada" && styles.active]}
+      {items.map((item) => {
+        const active = pathname === item.route;
+
+        return (
+          <Pressable
+            key={item.label}
+            onPress={() => router.push(item.route)}
+            style={({ pressed }) => [
+              styles.item,
+              pressed && styles.pressed,
+            ]}
           >
-            {item.label}
-          </Text>
-        </Pressable>
-      ))}
+            <Icon
+              name={item.icon}
+              color={
+                active
+                  ? colors.purple
+                  : colors.muted
+              }
+            />
+
+            <Text
+              style={[
+                styles.label,
+                active && styles.active,
+              ]}
+            >
+              {item.label}
+            </Text>
+          </Pressable>
+        );
+      })}
     </View>
   );
 }
@@ -49,6 +90,7 @@ const styles = StyleSheet.create({
     borderTopColor: colors.border,
     backgroundColor: colors.background,
   },
+
   item: {
     width: 72,
     flexShrink: 1,
@@ -57,12 +99,19 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     gap: 4,
   },
-  pressed: { opacity: 0.65 },
+
+  pressed: {
+    opacity: 0.65,
+  },
+
   label: {
     fontFamily: fonts.semibold,
     fontSize: 11,
     lineHeight: 14,
     color: colors.muted,
   },
-  active: { color: colors.purple },
+
+  active: {
+    color: colors.purple,
+  },
 });

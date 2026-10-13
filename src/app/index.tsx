@@ -1,5 +1,5 @@
-import { JourneyScreen } from "../../src/screens/JourneyScreen";
+import { JourneyScreen } from "../screens/JourneyScreen";
 
-export default function JourneyRoute() {
+export default function Index() {
     return <JourneyScreen />;
 }

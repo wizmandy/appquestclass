@@ -1,7 +1,7 @@
 import { Platform, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { BossCard } from "../components/BossCard";
-import { BottomMenu, MenuSection } from "../components/BottomMenu";
+import { BottomMenu } from "../components/BottomMenu";
 import { MissionCard } from "../components/MissionCard";
 import { PlayerHeader } from "../components/PlayerHeader";
 import { boss } from "../mocks/boss";
@@ -12,21 +12,6 @@ import { showMessage } from "../utils/showMessage";
 
 export function JourneyScreen() {
   const featuredQuest = quests[0];
-
-  function handleMenuSelect(section: MenuSection) {
-    if (section === "Jornada") {
-      showMessage(
-        "Jornada",
-        "Você está na sua jornada! Confira a missão em destaque e o progresso da turma.",
-      );
-      return;
-    }
-
-    showMessage(
-      section,
-      "Esta versão apresenta apenas a tela Jornada. Esta área ainda não foi desenvolvida.",
-    );
-  }
 
   return (
     <View style={styles.background}>
@@ -54,7 +39,7 @@ export function JourneyScreen() {
             <BossCard boss={boss} />
           </View>
         </ScrollView>
-        <BottomMenu onSelect={handleMenuSelect} />
+        <BottomMenu />
       </SafeAreaView>
     </View>
   );

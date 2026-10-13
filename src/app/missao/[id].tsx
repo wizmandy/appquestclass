@@ -1,10 +1,23 @@
-import { View, Text } from "react-native";
-import { colors } from "../../theme";
+import { Redirect, useLocalSearchParams } from "expo-router";
 
-export default function MissaoRoute() {
-    return (
-        <View>
-            <Text style={{ color: colors.text }}>Detalhes da Missão</Text>
-        </View>
-    );
+import { CharacterScreen } from "../../screens/CharacterScreen";
+import { MissionScreen } from "../../screens/MissionScreen";
+import { TavernScreen } from "../../screens/TavernScreen";
+
+export default function Screen() {
+  const { id } = useLocalSearchParams<{ id: string }>();
+
+  if (id === "missoes") {
+    return <MissionScreen />;
+  }
+
+  if (id === "taverna") {
+    return <TavernScreen />;
+  }
+
+  if (id === "personagem") {
+    return <CharacterScreen />;
+  }
+
+  return <Redirect href="/" />;
 }
