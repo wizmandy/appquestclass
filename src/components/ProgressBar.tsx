@@ -9,7 +9,6 @@ type ProgressBarProps = {
 };
 
 export function ProgressBar({ value, max, color, label }: ProgressBarProps) {
-  // A largura acompanha os dados e permanece entre 0 e 100%.
   const percentage =
     max > 0 ? Math.min(100, Math.max(0, (value / max) * 100)) : 0;
 

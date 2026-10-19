@@ -20,7 +20,8 @@
       "predictiveBackGestureEnabled": false
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
     },
     "plugins": [
       "expo-image",
@@ -29,12 +30,8 @@
       "expo-status-bar"
     ],
     "scheme": "questclass",
-    "expriments": {
+    "experiments": {
       "typedRoutes": true
-    },
-    "web": {
-      "favicon": "./assets/favicon.png",
-      "bundler": "metro"
     }
   }
 }

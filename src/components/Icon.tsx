@@ -1,5 +1,7 @@
 import { Image } from "expo-image";
 
+import { colors } from "../theme";
+
 const icons = {
   coins: {
     source: require("../../assets/icons/coins.svg"),
@@ -39,11 +41,24 @@ export type IconName = keyof typeof icons;
 
 type IconProps = {
   name: IconName;
+  active?: boolean;
   color?: string;
 };
 
-export function Icon({ name, color }: IconProps) {
+export function Icon({
+  name,
+  active,
+  color,
+}: IconProps) {
   const icon = icons[name];
+
+  const tintColor =
+    color ??
+    (active === undefined
+      ? undefined
+      : active
+        ? colors.purple
+        : colors.muted);
 
   return (
     <Image
@@ -53,7 +68,7 @@ export function Icon({ name, color }: IconProps) {
         height: icon.size,
       }}
       contentFit="contain"
-      tintColor={color ?? null}
+      tintColor={tintColor}
     />
   );
 }

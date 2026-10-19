@@ -1,23 +1,15 @@
 import { Redirect, useLocalSearchParams } from "expo-router";
 
-import { CharacterScreen } from "../../screens/CharacterScreen";
-import { MissionScreen } from "../../screens/MissionScreen";
-import { TavernScreen } from "../../screens/TavernScreen";
+import { quests } from "../../mocks/quests";
+import { MissionDetailScreen } from "../../screens/MissionDetailScreen";
 
-export default function Screen() {
+export default function MissionDetailRoute() {
   const { id } = useLocalSearchParams<{ id: string }>();
+  const quest = quests.find((item) => item.id === id);
 
-  if (id === "missoes") {
-    return <MissionScreen />;
+  if (!quest) {
+    return <Redirect href="/missoes" />;
   }
 
-  if (id === "taverna") {
-    return <TavernScreen />;
-  }
-
-  if (id === "personagem") {
-    return <CharacterScreen />;
-  }
-
-  return <Redirect href="/" />;
+  return <MissionDetailScreen quest={quest} />;
 }

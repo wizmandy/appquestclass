@@ -1,4 +1,3 @@
-// As mesmas cores e famílias de fonte são compartilhadas por toda a tela.
 export const colors = {
   background: "#282A36",
   surface: "#343746",
@@ -9,7 +8,11 @@ export const colors = {
   green: "#50FA7B",
   orange: "#FFB86C",
   red: "#FF5555",
+  pink: "#FF79C6",
+  cyan: "#8BE9FD",
   bossBackground: "#4C283C",
+  parchment: "#F3E8C8",
+  parchmentText: "#4A4038",
 };
 
 export const fonts = {

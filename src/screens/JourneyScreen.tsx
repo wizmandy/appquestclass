@@ -1,5 +1,7 @@
+import { useRouter } from "expo-router";
 import { Platform, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+
 import { BossCard } from "../components/BossCard";
 import { BottomMenu } from "../components/BottomMenu";
 import { MissionCard } from "../components/MissionCard";
@@ -8,34 +10,33 @@ import { boss } from "../mocks/boss";
 import { player } from "../mocks/player";
 import { quests } from "../mocks/quests";
 import { colors, fonts } from "../theme";
-import { showMessage } from "../utils/showMessage";
 
 export function JourneyScreen() {
+  const router = useRouter();
   const featuredQuest = quests[0];
 
   return (
     <View style={styles.background}>
       <SafeAreaView style={styles.screen}>
-        <ScrollView
-          style={styles.scroll}
-          contentContainerStyle={styles.content}
-        >
+        <ScrollView style={styles.scroll} contentContainerStyle={styles.content}>
           <PlayerHeader player={player} />
           <View style={styles.main}>
             <Text style={styles.sectionTitle} accessibilityRole="header">
               MISSÃO EM DESTAQUE
             </Text>
+
             {featuredQuest && (
               <MissionCard
                 quest={featuredQuest}
                 onPress={() =>
-                  showMessage(
-                    featuredQuest.title,
-                    `${featuredQuest.description}\n\nRecompensas: ${featuredQuest.reward.xp} XP e ${featuredQuest.reward.coins} moedas.`,
-                  )
+                  router.push({
+                    pathname: "/missao/[id]",
+                    params: { id: featuredQuest.id },
+                  })
                 }
               />
             )}
+
             <BossCard boss={boss} />
           </View>
         </ScrollView>
@@ -46,11 +47,7 @@ export function JourneyScreen() {
 }
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    alignItems: "center",
-    backgroundColor: colors.background,
-  },
+  background: { flex: 1, alignItems: "center", backgroundColor: colors.background },
   screen: {
     flex: 1,
     width: "100%",
